@@ -30,7 +30,9 @@ The supported deployment is a **Linux user systemd service**, running as the sam
 
 You need a working native Codex installation with its shared App Server running, and a WeChat account with ClawBot access. The protocol baseline tested here is Codex **0.162.1**.
 
-Build and install a checkout of this repository:
+For Linux x86_64 or aarch64 with glibc 2.39+, use the [v0.1.0 prebuilt release](https://github.com/kites262/codex-wechat/releases/tag/v0.1.0). Follow the [download and checksum verification steps](docs/deployment.md#2-download-and-install), then continue from the extracted package directory. The archive includes the binary, service files and documentation.
+
+For older GNU/Linux systems or another architecture, build and install a source checkout on the target machine:
 
 ```sh
 cargo build --locked --release

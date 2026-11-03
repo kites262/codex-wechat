@@ -22,7 +22,9 @@ Rust 编写的微信 ClawBot 消息桥，连接本机已有的 Codex 共享 App 
 
 需要可用的原生 Codex 及正在运行的共享 App Server，以及支持 ClawBot 的微信账号。已验证的 Codex 协议基线为 0.162.1。
 
-从项目源码构建并安装：
+Linux x86_64 或 aarch64 且 glibc 2.39+ 的系统，推荐使用 [v0.1.0 预编译包](https://github.com/kites262/codex-wechat/releases/tag/v0.1.0)。按[下载与校验步骤](docs/deployment.md#2-download-and-install)操作后，在解压目录继续安装；包中已包含程序、服务文件和文档。
+
+旧版 GNU/Linux 或其他架构可在目标机器上从项目源码构建并安装：
 
 ```sh
 cargo build --locked --release

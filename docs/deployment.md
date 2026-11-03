@@ -22,16 +22,50 @@ codex app-server daemon start
 
 The bridge connects to `${CODEX_HOME:-$HOME/.codex}/app-server-control/app-server-control.sock`. Its native process supplies model access, credentials, headers and tool execution. A missing socket is reported as a connection error and systemd retries; the bridge does not create a separate runtime.
 
-## 2. Build and install
+## 2. Download and install
 
-From a checkout of this repository, using Rust 1.88+ and a C compiler:
+The recommended packages are the [v0.1.0 Linux x86_64 binary](https://github.com/kites262/codex-wechat/releases/download/v0.1.0/codex-wechat-v0.1.0-x86_64-unknown-linux-gnu.tar.gz) and [v0.1.0 Linux aarch64 binary](https://github.com/kites262/codex-wechat/releases/download/v0.1.0/codex-wechat-v0.1.0-aarch64-unknown-linux-gnu.tar.gz), with [SHA256SUMS](https://github.com/kites262/codex-wechat/releases/download/v0.1.0/SHA256SUMS). These GNU/Linux packages support **glibc 2.39 or newer**. Each archive includes the executable, README files, license, service files and deployment guide in a single directory.
+
+Run these commands in Bash to select the local architecture, download and verify the package, then enter its directory:
+
+```bash
+set -eu
+cw_version=v0.1.0
+case "$(uname -m)" in
+  x86_64) cw_target=x86_64-unknown-linux-gnu ;;
+  aarch64|arm64) cw_target=aarch64-unknown-linux-gnu ;;
+  *) echo "Unsupported prebuilt architecture: $(uname -m)" >&2; exit 1 ;;
+esac
+cw_package="codex-wechat-${cw_version}-${cw_target}"
+cw_release="https://github.com/kites262/codex-wechat/releases/download/${cw_version}"
+cw_download_dir="$(mktemp -d)"
+cd "$cw_download_dir"
+curl -fL "${cw_release}/${cw_package}.tar.gz" -o "${cw_package}.tar.gz"
+curl -fL "${cw_release}/SHA256SUMS" -o SHA256SUMS
+awk -v file="${cw_package}.tar.gz" '$2 == file { print; found = 1 } END { if (!found) exit 1 }' SHA256SUMS > SHA256SUMS.selected
+sha256sum -c SHA256SUMS.selected
+tar -xzf "${cw_package}.tar.gz"
+cd "$cw_package"
+```
+
+The checksum command verifies only the package selected for this machine. Install the verified executable:
+
+```sh
+install -Dm755 codex-wechat ~/.local/bin/codex-wechat
+```
+
+Keep this package directory as your working directory for the service-file installation in step 4.
+
+### Build from source
+
+For older GNU/Linux systems or another architecture, build on the machine where the service will run, using Rust 1.88+ and a C compiler. From a checkout of this repository:
 
 ```sh
 cargo build --locked --release
 install -Dm755 target/release/codex-wechat ~/.local/bin/codex-wechat
 ```
 
-This produces a native executable with bundled SQLite and Rustls. Build on a Linux system compatible with the machine where the service will run.
+This produces a native executable with bundled SQLite and Rustls. Continue with the same user systemd setup below, using the source checkout as your working directory.
 
 ## 3. Link WeChat
 
@@ -112,23 +146,16 @@ Your machine's policy may require an administrator to run this command. Codex's 
 
 ## Upgrade
 
-Build and validate the new checkout:
-
-```sh
-cargo fmt --all --check
-cargo clippy --all-targets --locked -- -D warnings
-cargo test --locked
-cargo build --locked --release
-```
-
-Stop the channel, replace the executable and restart:
+Download, verify and extract the new release as in step 2, setting `cw_version` to the desired release tag. From the extracted package directory, stop the channel before replacing its executable:
 
 ```sh
 systemctl --user stop codex-wechat.service
-install -Dm755 target/release/codex-wechat ~/.local/bin/codex-wechat
+install -Dm755 codex-wechat ~/.local/bin/codex-wechat
 systemctl --user start codex-wechat.service
 ~/.local/bin/codex-wechat --state-dir ~/.config/codex-wechat status
 ```
+
+For a source installation, build the new checkout with `cargo build --locked --release` and use `target/release/codex-wechat` as the source of the `install` command above.
 
 Keep the state directory in place. Stopping the bridge closes its own connection, leaving the shared Codex process and its tasks running. The bridge rejoins saved bindings and reconciles unfinished tasks with native state after reconnecting. Selecting a thread again with `/switch` also reconciles its native state. Delivery still follows the current selection; output muted by a thread switch is not replayed.
 
