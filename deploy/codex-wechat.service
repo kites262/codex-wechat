@@ -1,0 +1,16 @@
+[Unit]
+Description=WeChat channel for native Codex
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/codex-wechat/service.env
+ExecStart=%h/.local/bin/codex-wechat --state-dir %h/.config/codex-wechat start --cwd ${CODEX_WECHAT_CWD}
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=30
+UMask=0077
+
+[Install]
+WantedBy=default.target

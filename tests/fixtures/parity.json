@@ -1,0 +1,2952 @@
+{
+  "formatVersion": 1,
+  "reference": {
+    "implementation": "TypeScript Bridge (codex-wechat-exp/dist/src/bridge.js)",
+    "sha256": "32d19c2d15095a5ca37fb8d30e8ef87d76eee715f95e060e4e2018d23841ef29",
+    "generation": "Executed the reference Bridge and in-memory Store with synthetic MockCodex RPC replies. No network, real sessions, credentials or model calls. Each checkpoint captures actual reference output and state; Rust consumes this standalone file."
+  },
+  "scenarios": [
+    {
+      "name": "new-thread-and-command-validation",
+      "steps": [
+        {
+          "input": "/new",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "New thread: fresh"
+              }
+            ],
+            "bindings": {
+              "alice": "fresh"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/start",
+                "params": {
+                  "cwd": "/project"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/new unexpected",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "New thread: fresh"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Usage: /new"
+              }
+            ],
+            "bindings": {
+              "alice": "fresh"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": "Usage: /new"
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/start",
+                "params": {
+                  "cwd": "/project"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch 0",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "New thread: fresh"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Usage: /new"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Invalid selection. Use /switch to list threads, then /switch <number>."
+              }
+            ],
+            "bindings": {
+              "alice": "fresh"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": "Usage: /new"
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": "Invalid selection. Use /switch to list threads, then /switch <number>."
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/start",
+                "params": {
+                  "cwd": "/project"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch 1",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "New thread: fresh"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Usage: /new"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Invalid selection. Use /switch to list threads, then /switch <number>."
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Invalid selection. Use /switch to list threads, then /switch <number>."
+              }
+            ],
+            "bindings": {
+              "alice": "fresh"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": "Usage: /new"
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": "Invalid selection. Use /switch to list threads, then /switch <number>."
+              },
+              {
+                "id": "4",
+                "status": "done",
+                "error": "Invalid selection. Use /switch to list threads, then /switch <number>."
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/start",
+                "params": {
+                  "cwd": "/project"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch A B",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "New thread: fresh"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Usage: /new"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Invalid selection. Use /switch to list threads, then /switch <number>."
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Invalid selection. Use /switch to list threads, then /switch <number>."
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Usage: /switch [1-10 | threadId]"
+              }
+            ],
+            "bindings": {
+              "alice": "fresh"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": "Usage: /new"
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": "Invalid selection. Use /switch to list threads, then /switch <number>."
+              },
+              {
+                "id": "4",
+                "status": "done",
+                "error": "Invalid selection. Use /switch to list threads, then /switch <number>."
+              },
+              {
+                "id": "5",
+                "status": "done",
+                "error": "Usage: /switch [1-10 | threadId]"
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/start",
+                "params": {
+                  "cwd": "/project"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "all-assistant-phases-authoritative-whitespace-and-native-zero-duration",
+      "bindings": {
+        "alice": "A"
+      },
+      "steps": [
+        {
+          "input": "  hello\n",
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/agentMessage/delta",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "itemId": "a",
+              "delta": "discarded streaming text"
+            }
+          },
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "discarded streaming text",
+                    "phase": null,
+                    "completed": false,
+                    "queued": false
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "a",
+                "text": "  commentary\n\n",
+                "phase": "commentary"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "  commentary\n\n"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "  commentary\n\n",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "b",
+                "text": "partial answer",
+                "phase": "partial_answer"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "  commentary\n\n"
+              },
+              {
+                "peer": "alice",
+                "text": "partial answer"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "  commentary\n\n",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "b": {
+                    "text": "partial answer",
+                    "phase": "partial_answer",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "c",
+                "text": " final 😀\n",
+                "phase": "final_answer"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "  commentary\n\n"
+              },
+              {
+                "peer": "alice",
+                "text": "partial answer"
+              },
+              {
+                "peer": "alice",
+                "text": " final 😀\n"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "  commentary\n\n",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "b": {
+                    "text": "partial answer",
+                    "phase": "partial_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "c": {
+                    "text": " final 😀\n",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "d",
+                "text": "legacy text"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "  commentary\n\n"
+              },
+              {
+                "peer": "alice",
+                "text": "partial answer"
+              },
+              {
+                "peer": "alice",
+                "text": " final 😀\n"
+              },
+              {
+                "peer": "alice",
+                "text": "legacy text"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "  commentary\n\n",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "b": {
+                    "text": "partial answer",
+                    "phase": "partial_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "c": {
+                    "text": " final 😀\n",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "d": {
+                    "text": "legacy text",
+                    "phase": null,
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "a",
+                "text": "duplicate must not resend",
+                "phase": "commentary"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "  commentary\n\n"
+              },
+              {
+                "peer": "alice",
+                "text": "partial answer"
+              },
+              {
+                "peer": "alice",
+                "text": " final 😀\n"
+              },
+              {
+                "peer": "alice",
+                "text": "legacy text"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "duplicate must not resend",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "b": {
+                    "text": "partial answer",
+                    "phase": "partial_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "c": {
+                    "text": " final 😀\n",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "d": {
+                    "text": "legacy text",
+                    "phase": null,
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "A",
+              "turn": {
+                "id": "turn-1",
+                "status": "completed",
+                "startedAt": 10,
+                "completedAt": 99,
+                "durationMs": 0
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "  commentary\n\n"
+              },
+              {
+                "peer": "alice",
+                "text": "partial answer"
+              },
+              {
+                "peer": "alice",
+                "text": " final 😀\n"
+              },
+              {
+                "peer": "alice",
+                "text": "legacy text"
+              },
+              {
+                "peer": "alice",
+                "text": "[done in 0.0s]"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "completed",
+                "items": {
+                  "a": {
+                    "text": "duplicate must not resend",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "b": {
+                    "text": "partial answer",
+                    "phase": "partial_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "c": {
+                    "text": " final 😀\n",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  },
+                  "d": {
+                    "text": "legacy text",
+                    "phase": null,
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "  hello\n"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "interrupted-full-items-replace-unpublished-deltas",
+      "bindings": {
+        "alice": "A"
+      },
+      "steps": [
+        {
+          "input": "hello",
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/agentMessage/delta",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "itemId": "a",
+              "delta": "buffered"
+            }
+          },
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "buffered",
+                    "phase": null,
+                    "completed": false,
+                    "queued": false
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "A",
+              "turn": {
+                "id": "turn-1",
+                "status": "interrupted",
+                "durationMs": 65200,
+                "itemsView": "full",
+                "items": [
+                  {
+                    "type": "agentMessage",
+                    "id": "a",
+                    "text": "authoritative full body"
+                  }
+                ]
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "authoritative full body"
+              },
+              {
+                "peer": "alice",
+                "text": "[stopped in 1m5.2s]"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "interrupted",
+                "items": {
+                  "a": {
+                    "text": "authoritative full body",
+                    "phase": null,
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "A",
+              "turn": {
+                "id": "turn-1",
+                "status": "completed",
+                "durationMs": 999
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "authoritative full body"
+              },
+              {
+                "peer": "alice",
+                "text": "[stopped in 1m5.2s]"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "interrupted",
+                "items": {
+                  "a": {
+                    "text": "authoritative full body",
+                    "phase": null,
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "failed-turn-retains-native-error-after-commentary",
+      "bindings": {
+        "alice": "A"
+      },
+      "steps": [
+        {
+          "input": "hello",
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "a",
+                "text": "Before failure.",
+                "phase": "commentary"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Before failure."
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "Before failure.",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "A",
+              "turn": {
+                "id": "turn-1",
+                "status": "failed",
+                "durationMs": 1200,
+                "error": {
+                  "message": "Synthetic native failure"
+                }
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Before failure."
+              },
+              {
+                "peer": "alice",
+                "text": "[failed in 1.2s]\nSynthetic native failure"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "failed",
+                "items": {
+                  "a": {
+                    "text": "Before failure.",
+                    "phase": "commentary",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "unix-second-native-timestamps-control-completion-duration",
+      "bindings": {
+        "alice": "A"
+      },
+      "steps": [
+        {
+          "input": "hello",
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "a",
+                "text": "result",
+                "phase": "final_answer"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "result"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": "result",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "A",
+              "turn": {
+                "id": "turn-1",
+                "status": "completed",
+                "startedAt": 10,
+                "completedAt": 40.1
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "result"
+              },
+              {
+                "peer": "alice",
+                "text": "[done in 30.1s]"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "completed",
+                "items": {
+                  "a": {
+                    "text": "result",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "hello"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "numbered-switch-snapshot-survives-unrelated-session-list",
+      "bindings": {
+        "alice": "T3"
+      },
+      "responses": [
+        {
+          "method": "thread/list",
+          "params": {
+            "cursor": "next"
+          },
+          "result": {
+            "data": [
+              {
+                "id": "T9",
+                "cwd": "/project",
+                "name": "Title\n9"
+              },
+              {
+                "id": "T10",
+                "cwd": "/project",
+                "name": "Title\n10"
+              },
+              {
+                "id": "T11",
+                "cwd": "/project",
+                "name": "Title\n11"
+              },
+              {
+                "id": "T12",
+                "cwd": "/project",
+                "name": "Title\n12"
+              }
+            ]
+          }
+        },
+        {
+          "method": "thread/list",
+          "result": {
+            "data": [
+              {
+                "id": "T1",
+                "cwd": "/project",
+                "name": "Title\n1"
+              },
+              {
+                "id": "T2",
+                "cwd": "/project",
+                "name": "Title\n2"
+              },
+              {
+                "id": "T3",
+                "cwd": "/project",
+                "name": "Title\n3"
+              },
+              {
+                "id": "T4",
+                "cwd": "/project",
+                "name": "Title\n4"
+              },
+              {
+                "id": "T5",
+                "cwd": "/project",
+                "name": "Title\n5"
+              },
+              {
+                "id": "T6",
+                "cwd": "/project",
+                "name": "Title\n6"
+              },
+              {
+                "id": "T7",
+                "cwd": "/project",
+                "name": "Title\n7"
+              },
+              {
+                "id": "T8",
+                "cwd": "/project",
+                "name": "Title\n8"
+              },
+              {
+                "id": "T1",
+                "cwd": "/project"
+              },
+              {
+                "id": "foreign",
+                "cwd": "/other"
+              }
+            ],
+            "nextCursor": "next"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "input": "/switch",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Recent threads:\n\n1. Title 1\n\n2. Title 2\n\n3. Title 3 *\n\n4. Title 4\n\n5. Title 5\n\n6. Title 6\n\n7. Title 7\n\n8. Title 8\n\n9. Title 9\n\n10. Title 10\n\n/switch <number>"
+              }
+            ],
+            "bindings": {
+              "alice": "T3"
+            },
+            "switchChoices": {
+              "alice": [
+                {
+                  "threadId": "T1",
+                  "title": "Title 1"
+                },
+                {
+                  "threadId": "T2",
+                  "title": "Title 2"
+                },
+                {
+                  "threadId": "T3",
+                  "title": "Title 3"
+                },
+                {
+                  "threadId": "T4",
+                  "title": "Title 4"
+                },
+                {
+                  "threadId": "T5",
+                  "title": "Title 5"
+                },
+                {
+                  "threadId": "T6",
+                  "title": "Title 6"
+                },
+                {
+                  "threadId": "T7",
+                  "title": "Title 7"
+                },
+                {
+                  "threadId": "T8",
+                  "title": "Title 8"
+                },
+                {
+                  "threadId": "T9",
+                  "title": "Title 9"
+                },
+                {
+                  "threadId": "T10",
+                  "title": "Title 10"
+                }
+              ]
+            },
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 10,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 2,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc",
+                  "cursor": "next"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "responses": [
+            {
+              "method": "thread/list",
+              "result": {
+                "data": [
+                  {
+                    "id": "latest",
+                    "cwd": "/project",
+                    "name": "Reordered latest"
+                  },
+                  {
+                    "id": "T1",
+                    "cwd": "/project",
+                    "name": "Changed title"
+                  }
+                ]
+              }
+            }
+          ],
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Recent threads:\n\n1. Title 1\n\n2. Title 2\n\n3. Title 3 *\n\n4. Title 4\n\n5. Title 5\n\n6. Title 6\n\n7. Title 7\n\n8. Title 8\n\n9. Title 9\n\n10. Title 10\n\n/switch <number>"
+              }
+            ],
+            "bindings": {
+              "alice": "T3"
+            },
+            "switchChoices": {
+              "alice": [
+                {
+                  "threadId": "T1",
+                  "title": "Title 1"
+                },
+                {
+                  "threadId": "T2",
+                  "title": "Title 2"
+                },
+                {
+                  "threadId": "T3",
+                  "title": "Title 3"
+                },
+                {
+                  "threadId": "T4",
+                  "title": "Title 4"
+                },
+                {
+                  "threadId": "T5",
+                  "title": "Title 5"
+                },
+                {
+                  "threadId": "T6",
+                  "title": "Title 6"
+                },
+                {
+                  "threadId": "T7",
+                  "title": "Title 7"
+                },
+                {
+                  "threadId": "T8",
+                  "title": "Title 8"
+                },
+                {
+                  "threadId": "T9",
+                  "title": "Title 9"
+                },
+                {
+                  "threadId": "T10",
+                  "title": "Title 10"
+                }
+              ]
+            },
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 10,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 2,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc",
+                  "cursor": "next"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/sessions",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Recent threads:\n\n1. Title 1\n\n2. Title 2\n\n3. Title 3 *\n\n4. Title 4\n\n5. Title 5\n\n6. Title 6\n\n7. Title 7\n\n8. Title 8\n\n9. Title 9\n\n10. Title 10\n\n/switch <number>"
+              },
+              {
+                "peer": "alice",
+                "text": "latest  Reordered latest\n\nT1  Changed title"
+              }
+            ],
+            "bindings": {
+              "alice": "T3"
+            },
+            "switchChoices": {
+              "alice": [
+                {
+                  "threadId": "T1",
+                  "title": "Title 1"
+                },
+                {
+                  "threadId": "T2",
+                  "title": "Title 2"
+                },
+                {
+                  "threadId": "T3",
+                  "title": "Title 3"
+                },
+                {
+                  "threadId": "T4",
+                  "title": "Title 4"
+                },
+                {
+                  "threadId": "T5",
+                  "title": "Title 5"
+                },
+                {
+                  "threadId": "T6",
+                  "title": "Title 6"
+                },
+                {
+                  "threadId": "T7",
+                  "title": "Title 7"
+                },
+                {
+                  "threadId": "T8",
+                  "title": "Title 8"
+                },
+                {
+                  "threadId": "T9",
+                  "title": "Title 9"
+                },
+                {
+                  "threadId": "T10",
+                  "title": "Title 10"
+                }
+              ]
+            },
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 10,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 2,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc",
+                  "cursor": "next"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 100,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch 2",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Recent threads:\n\n1. Title 1\n\n2. Title 2\n\n3. Title 3 *\n\n4. Title 4\n\n5. Title 5\n\n6. Title 6\n\n7. Title 7\n\n8. Title 8\n\n9. Title 9\n\n10. Title 10\n\n/switch <number>"
+              },
+              {
+                "peer": "alice",
+                "text": "latest  Reordered latest\n\nT1  Changed title"
+              },
+              {
+                "peer": "alice",
+                "text": "Switched to: Title 2"
+              }
+            ],
+            "bindings": {
+              "alice": "T2"
+            },
+            "switchChoices": {
+              "alice": [
+                {
+                  "threadId": "T1",
+                  "title": "Title 1"
+                },
+                {
+                  "threadId": "T2",
+                  "title": "Title 2"
+                },
+                {
+                  "threadId": "T3",
+                  "title": "Title 3"
+                },
+                {
+                  "threadId": "T4",
+                  "title": "Title 4"
+                },
+                {
+                  "threadId": "T5",
+                  "title": "Title 5"
+                },
+                {
+                  "threadId": "T6",
+                  "title": "Title 6"
+                },
+                {
+                  "threadId": "T7",
+                  "title": "Title 7"
+                },
+                {
+                  "threadId": "T8",
+                  "title": "Title 8"
+                },
+                {
+                  "threadId": "T9",
+                  "title": "Title 9"
+                },
+                {
+                  "threadId": "T10",
+                  "title": "Title 10"
+                }
+              ]
+            },
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 10,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 2,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc",
+                  "cursor": "next"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 100,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "T2",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "T2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch 11",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Recent threads:\n\n1. Title 1\n\n2. Title 2\n\n3. Title 3 *\n\n4. Title 4\n\n5. Title 5\n\n6. Title 6\n\n7. Title 7\n\n8. Title 8\n\n9. Title 9\n\n10. Title 10\n\n/switch <number>"
+              },
+              {
+                "peer": "alice",
+                "text": "latest  Reordered latest\n\nT1  Changed title"
+              },
+              {
+                "peer": "alice",
+                "text": "Switched to: Title 2"
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Invalid selection. Use /switch to list threads, then /switch <number>."
+              }
+            ],
+            "bindings": {
+              "alice": "T2"
+            },
+            "switchChoices": {
+              "alice": [
+                {
+                  "threadId": "T1",
+                  "title": "Title 1"
+                },
+                {
+                  "threadId": "T2",
+                  "title": "Title 2"
+                },
+                {
+                  "threadId": "T3",
+                  "title": "Title 3"
+                },
+                {
+                  "threadId": "T4",
+                  "title": "Title 4"
+                },
+                {
+                  "threadId": "T5",
+                  "title": "Title 5"
+                },
+                {
+                  "threadId": "T6",
+                  "title": "Title 6"
+                },
+                {
+                  "threadId": "T7",
+                  "title": "Title 7"
+                },
+                {
+                  "threadId": "T8",
+                  "title": "Title 8"
+                },
+                {
+                  "threadId": "T9",
+                  "title": "Title 9"
+                },
+                {
+                  "threadId": "T10",
+                  "title": "Title 10"
+                }
+              ]
+            },
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "4",
+                "status": "done",
+                "error": "Invalid selection. Use /switch to list threads, then /switch <number>."
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 10,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 2,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc",
+                  "cursor": "next"
+                }
+              },
+              {
+                "method": "thread/list",
+                "params": {
+                  "cwd": "/project",
+                  "limit": 100,
+                  "sortKey": "updated_at",
+                  "sortDirection": "desc"
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "T2",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "T2"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "failed-switch-and-foreign-directory-preserve-binding",
+      "bindings": {
+        "alice": "A"
+      },
+      "responses": [
+        {
+          "method": "thread/read",
+          "params": {
+            "threadId": "foreign"
+          },
+          "result": {
+            "thread": {
+              "id": "foreign",
+              "cwd": "/other",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            }
+          }
+        },
+        {
+          "method": "thread/resume",
+          "params": {
+            "threadId": "B"
+          },
+          "error": {
+            "code": -32603,
+            "message": "Synthetic resume failure"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "input": "/switch foreign",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Request failed: This thread belongs to a different working directory."
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": "This thread belongs to a different working directory."
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "foreign",
+                  "includeTurns": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch B",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Request failed: This thread belongs to a different working directory."
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Synthetic resume failure"
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": "This thread belongs to a different working directory."
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": "Synthetic resume failure"
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "foreign",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "B",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "B"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/status",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Request failed: This thread belongs to a different working directory."
+              },
+              {
+                "peer": "alice",
+                "text": "Request failed: Synthetic resume failure"
+              },
+              {
+                "peer": "alice",
+                "text": "Current thread: A\nNo active turns."
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": "This thread belongs to a different working directory."
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": "Synthetic resume failure"
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "foreign",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "B",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "B"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "busy-input-is-not-submitted-and-old-run-survives-switch",
+      "bindings": {
+        "alice": "A"
+      },
+      "steps": [
+        {
+          "input": "first",
+          "expected": {
+            "messages": [],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "first"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "second",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Thread is busy or its status is unknown. Wait, /stop, or /recover before continuing. This input was not submitted."
+              }
+            ],
+            "bindings": {
+              "alice": "A"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "first"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "input": "/switch B",
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Thread is busy or its status is unknown. Wait, /stop, or /recover before continuing. This input was not submitted."
+              },
+              {
+                "peer": "alice",
+                "text": "Switched to: B"
+              }
+            ],
+            "bindings": {
+              "alice": "B"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {}
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "first"
+                    }
+                  ]
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "B",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "B"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "item/completed",
+            "params": {
+              "threadId": "A",
+              "turnId": "turn-1",
+              "item": {
+                "type": "agentMessage",
+                "id": "a",
+                "text": " old run result\n",
+                "phase": "final_answer"
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Thread is busy or its status is unknown. Wait, /stop, or /recover before continuing. This input was not submitted."
+              },
+              {
+                "peer": "alice",
+                "text": "Switched to: B"
+              },
+              {
+                "peer": "alice",
+                "text": " old run result\n"
+              }
+            ],
+            "bindings": {
+              "alice": "B"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "running",
+                "items": {
+                  "a": {
+                    "text": " old run result\n",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "first"
+                    }
+                  ]
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "B",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "B"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "method": "turn/completed",
+            "params": {
+              "threadId": "A",
+              "turn": {
+                "id": "turn-1",
+                "status": "completed",
+                "durationMs": 30100
+              }
+            }
+          },
+          "expected": {
+            "messages": [
+              {
+                "peer": "alice",
+                "text": "Thread is busy or its status is unknown. Wait, /stop, or /recover before continuing. This input was not submitted."
+              },
+              {
+                "peer": "alice",
+                "text": "Switched to: B"
+              },
+              {
+                "peer": "alice",
+                "text": " old run result\n"
+              },
+              {
+                "peer": "alice",
+                "text": "[done in 30.1s]"
+              }
+            ],
+            "bindings": {
+              "alice": "B"
+            },
+            "switchChoices": {},
+            "runs": [
+              {
+                "threadId": "A",
+                "turnId": "turn-1",
+                "status": "completed",
+                "items": {
+                  "a": {
+                    "text": " old run result\n",
+                    "phase": "final_answer",
+                    "completed": true,
+                    "queued": true
+                  }
+                }
+              }
+            ],
+            "inbox": [
+              {
+                "id": "1",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "2",
+                "status": "done",
+                "error": null
+              },
+              {
+                "id": "3",
+                "status": "done",
+                "error": null
+              }
+            ],
+            "calls": [
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "A",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "A"
+                }
+              },
+              {
+                "method": "turn/start",
+                "params": {
+                  "threadId": "A",
+                  "input": [
+                    {
+                      "type": "text",
+                      "text": "first"
+                    }
+                  ]
+                }
+              },
+              {
+                "method": "thread/read",
+                "params": {
+                  "threadId": "B",
+                  "includeTurns": false
+                }
+              },
+              {
+                "method": "thread/resume",
+                "params": {
+                  "threadId": "B"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

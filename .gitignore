@@ -1,0 +1,7 @@
+/target/
+/dist/
+.env
+.state/
+*.sqlite*
+account.json
+*.tmp

@@ -1,0 +1,51 @@
+name: CI
+on:
+  push:
+    branches: ['**']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  msrv:
+    name: Rust 1.88
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.88.0
+      - run: cargo check --all-targets --locked
+  check:
+    name: Check (${{ matrix.target }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+          - runner: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --all --check
+      - run: cargo clippy --all-targets --locked -- -D warnings
+      - run: cargo test --locked
+      - run: cargo build --locked --release --target ${{ matrix.target }}
+      - name: Check executable and explicit state directory
+        shell: bash
+        env:
+          RELEASE_TARGET: ${{ matrix.target }}
+        run: |
+          binary="target/$RELEASE_TARGET/release/codex-wechat"
+          "$binary" --version
+          "$binary" --help
+          "$binary" --state-dir "$RUNNER_TEMP/codex-wechat-state" status
+          if "$binary" status; then
+            echo 'Missing --state-dir unexpectedly succeeded' >&2
+            exit 1
+          fi
